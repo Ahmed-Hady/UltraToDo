@@ -1,19 +1,33 @@
 package org.ultradevs.todolist.activities;
 
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import org.ultradevs.todolist.R;
+import org.ultradevs.todolist.framgments.LoginFragment;
+import org.ultradevs.todolist.framgments.RegisterFragment;
+
+import static org.ultradevs.todolist.helpers.users_db_helper.USER_DATABASE_NAME;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    final static public String LOG_TAG = "UltraToDo";
+
+    private RegisterFragment mRegister;
+    private LoginFragment mLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +44,13 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mRegister = new RegisterFragment();
+        mLogin = new LoginFragment();
+
+        if(CheckDB() == false) {
+            updateFragment(this.mRegister);
+        }
     }
 
     @Override
@@ -87,5 +108,30 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    /**
+     * Check DB
+     */
+    public boolean CheckDB(){
+        SQLiteDatabase db = null;
+        try {
+            db = SQLiteDatabase.openDatabase(USER_DATABASE_NAME, null,
+                    SQLiteDatabase.OPEN_READWRITE);
+            return true;
+        } catch (SQLiteException e) {
+            Log.d(LOG_TAG, "Error .. DB Not Found !");
+            return false;
+        }
+    }
+
+    /**
+     * Update Content control with new fragment
+     */
+    protected void updateFragment(Fragment fragment) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        ft.replace(R.id.content, fragment);
+        ft.commit();
     }
 }

@@ -69,13 +69,16 @@ public class LoginFragment extends Fragment
                 "' AND " + UserContract.USERS_ENTERY.COLUMN_PASSWORD + "='" + pass + "'");
 
         SQLiteDatabase sqlDB = mUsersDbHelper.getWritableDatabase();
-//        try {
+        try {
             sqlDB.execSQL(sql);
-            ((MainActivity)getActivity()).SetDrawers();
-            ((MainActivity)getActivity()).updateFragment(((MainActivity)getActivity()).mMain);
-//        }catch (SQLException e){
-//            Log.d(LOG_TAG, e.getMessage());
-//            Toast.makeText(getContext(), "Login Failed ! .. Please try again", Toast.LENGTH_LONG).show();
-//        }
+            if(((MainActivity)getActivity()).CheckLogin() == true) {
+                ((MainActivity) getActivity()).SetDrawers();
+                ((MainActivity) getActivity()).updateFragment(((MainActivity) getActivity()).mMain);
+            } else {
+                Toast.makeText(getContext(), "Login Failed ! .. Please try again", Toast.LENGTH_LONG).show();
+            }
+        }catch (SQLException e){
+            Log.d(LOG_TAG, e.getMessage());
+        }
     }
 }

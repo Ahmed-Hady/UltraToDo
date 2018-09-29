@@ -1,14 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".framgments.LoginFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.PGtitle"
+        android:text="@string/Login_title" />
 
-</FrameLayout>
+    <ImageView
+        style="@style/AppTheme.BigCenterImage"
+        android:layout_width="@dimen/b_img_size"
+        android:layout_height="@dimen/b_img_size"
+        android:layout_marginTop="@dimen/b_img_margin_top"
+        android:src="@drawable/ic_lock_open" />
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/ed_tex_layout_margin_top"
+        android:padding="@dimen/reg_items_layout_padding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/ed_tex_layout_margin_bottom"
+            android:orientation="horizontal">
+            <ImageView
+                android:src="@drawable/ic_account"
+                android:tint="@color/colorAccent"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_width="@dimen/ed_icon_size"
+                android:layout_height="@dimen/ed_icon_size" />
+
+            <EditText
+                android:id="@+id/t_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/ed_tex_layout_margin_bottom"
+            android:orientation="horizontal">
+            <ImageView
+                android:src="@drawable/ic_lock"
+                android:tint="@color/colorAccent"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_width="@dimen/ed_icon_size"
+                android:layout_height="@dimen/ed_icon_size" />
+
+            <EditText
+                android:id="@+id/t_user_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:inputType="textPassword" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/ed_tex_layout_margin_bottom"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/LogBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/LoginBtn"
+                android:theme="@style/AppTheme.ColoredBtn" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

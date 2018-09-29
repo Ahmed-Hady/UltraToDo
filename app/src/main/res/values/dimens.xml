@@ -4,5 +4,10 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="pgTitle_text_size">22dp</dimen>
+    <dimen name="pgTitle_padding">14dp</dimen>
+    <dimen name="b_img_size">100dp</dimen>
+    <dimen name="ed_icon_size">32dp</dimen>
+    <dimen name="ed_tex_layout_margin_top">33dp</dimen>
+    <dimen name="ed_tex_layout_margin_bottom">10dp</dimen>
 </resources>

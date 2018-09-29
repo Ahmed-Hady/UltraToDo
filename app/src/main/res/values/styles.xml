@@ -23,4 +23,22 @@
         <item name="android:titleTextColor" tools:ignore="NewApi">@color/colorAccent</item>
         <item name="android:textAlignment">center</item>
     </style>
+
+    <style name="AppTheme.PGtitle">
+        <item name="android:padding">@dimen/pgTitle_padding</item>
+        <item name="android:background">@color/colorAccent</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/pgTitle_text_size</item>
+    </style>
+
+    <style name="AppTheme.BigCenterImage">
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:tint">@color/colorAccent</item>
+        <item name="android:layout_gravity">center_vertical|center_horizontal</item>
+    </style>
+
+    <style name="AppTheme.ColoredBtn">
+        <item name="android:backgroundTint">@color/colorAccent</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 </resources>

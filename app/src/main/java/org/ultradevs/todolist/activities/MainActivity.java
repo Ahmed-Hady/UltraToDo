@@ -1,5 +1,6 @@
 package org.ultradevs.todolist.activities;
 
+import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
@@ -14,6 +15,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import org.ultradevs.todolist.R;
 import org.ultradevs.todolist.framgments.LoginFragment;
@@ -134,4 +138,5 @@ public class MainActivity extends AppCompatActivity
         ft.replace(R.id.content, fragment);
         ft.commit();
     }
+    
 }

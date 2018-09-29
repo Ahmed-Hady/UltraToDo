@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import org.ultradevs.todolist.R;
 import org.ultradevs.todolist.framgments.LoginFragment;
+import org.ultradevs.todolist.framgments.MainFragment;
 import org.ultradevs.todolist.framgments.RegisterFragment;
 import org.ultradevs.todolist.helpers.db_helper;
 import org.ultradevs.todolist.utils.UserContract;
@@ -34,18 +35,23 @@ public class MainActivity extends AppCompatActivity
 
     public RegisterFragment mRegister;
     public LoginFragment mLogin;
+    public MainFragment mMain;
+
+    public Toolbar toolbar;
+    public DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         mRegister = new RegisterFragment();
         mLogin = new LoginFragment();
+        mMain = new MainFragment();
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         if(CheckDB() == false) {
             updateFragment(this.mRegister);
@@ -55,21 +61,25 @@ public class MainActivity extends AppCompatActivity
                 updateFragment(mLogin);
                 drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
             }else{
-
-                ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                        this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-                drawer.addDrawerListener(toggle);
-                toggle.syncState();
-
-                NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-                navigationView.setNavigationItemSelectedListener(this);
+                updateFragment(mMain);
+                SetDrawers();
             }
         }
     }
 
+    public void SetDrawers(){ ;
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -119,7 +129,6 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

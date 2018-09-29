@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.ultradevs.todolist.R;
 import org.ultradevs.todolist.activities.MainActivity;
@@ -68,11 +69,13 @@ public class LoginFragment extends Fragment
                 "' AND " + UserContract.USERS_ENTERY.COLUMN_PASSWORD + "='" + pass + "'");
 
         SQLiteDatabase sqlDB = mUsersDbHelper.getWritableDatabase();
-
-        try {
+//        try {
             sqlDB.execSQL(sql);
-        }catch (SQLException e){
-            Log.d(LOG_TAG, e.getMessage());
-        }
+            ((MainActivity)getActivity()).SetDrawers();
+            ((MainActivity)getActivity()).updateFragment(((MainActivity)getActivity()).mMain);
+//        }catch (SQLException e){
+//            Log.d(LOG_TAG, e.getMessage());
+//            Toast.makeText(getContext(), "Login Failed ! .. Please try again", Toast.LENGTH_LONG).show();
+//        }
     }
 }

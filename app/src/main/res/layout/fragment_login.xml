@@ -40,7 +40,7 @@
                 android:layout_height="@dimen/ed_icon_size" />
 
             <EditText
-                android:id="@+id/t_user_name"
+                android:id="@+id/log_u_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal" />
@@ -59,7 +59,7 @@
                 android:layout_height="@dimen/ed_icon_size" />
 
             <EditText
-                android:id="@+id/t_user_pass"
+                android:id="@+id/log_u_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"

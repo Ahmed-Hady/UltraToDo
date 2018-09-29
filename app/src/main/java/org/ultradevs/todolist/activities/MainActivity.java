@@ -1,8 +1,10 @@
 package org.ultradevs.todolist.activities;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -15,10 +17,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import org.ultradevs.todolist.R;
 import org.ultradevs.todolist.framgments.LoginFragment;
 import org.ultradevs.todolist.framgments.RegisterFragment;
+import org.ultradevs.todolist.helpers.db_helper;
+import org.ultradevs.todolist.utils.UserContract;
 
 import static org.ultradevs.todolist.helpers.db_helper.DATABASE_NAME;
 
@@ -27,8 +32,8 @@ public class MainActivity extends AppCompatActivity
 
     final static public String LOG_TAG = "UltraToDo";
 
-    private RegisterFragment mRegister;
-    private LoginFragment mLogin;
+    public RegisterFragment mRegister;
+    public LoginFragment mLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,10 @@ public class MainActivity extends AppCompatActivity
 
         if(CheckDB() == false) {
             updateFragment(this.mRegister);
+        } else {
+            if(CheckLogin() == false){
+                updateFragment(mLogin);
+            }
         }
     }
 
@@ -114,22 +123,35 @@ public class MainActivity extends AppCompatActivity
     /**
      * Check DB
      */
+    private db_helper mUsersDbHelper;
     public boolean CheckDB(){
-        SQLiteDatabase db = null;
-        try {
-            db = SQLiteDatabase.openDatabase(DATABASE_NAME, null,
-                    SQLiteDatabase.OPEN_READWRITE);
+            mUsersDbHelper = new db_helper(getBaseContext());
+            SQLiteDatabase db = mUsersDbHelper.getReadableDatabase();
+            if (db.isOpen()) {
+                Log.d(LOG_TAG, "DB Works Well !");
+                if(mUsersDbHelper.getUsersCount() > 0) {
+                    return true;
+                } else{
+                    return false;
+                }
+            } else {
+                Log.d(LOG_TAG, "Error .. DB Not Found !");
+                return false;
+            }
+    }
+
+    public boolean CheckLogin(){
+        mUsersDbHelper = new db_helper(getBaseContext());
+        if(mUsersDbHelper.getNumOfLog() == 1) {
             return true;
-        } catch (SQLiteException e) {
-            Log.d(LOG_TAG, "Error .. DB Not Found !");
+        } else{
             return false;
         }
     }
-
     /**
      * Update Content control with new fragment
      */
-    protected void updateFragment(Fragment fragment) {
+    public void updateFragment(Fragment fragment) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
         ft.replace(R.id.content, fragment);

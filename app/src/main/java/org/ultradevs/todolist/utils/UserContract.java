@@ -12,12 +12,12 @@ public class UserContract {
         public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 
         // Define the possible paths for accessing data in this contract
-        public static final String PATH_USERS = "tasks";
+        public static final String PATH_USERS = "users";
 
-        /* TaskEntry is an inner class that defines the contents of the task table */
+        /* UserEntry is an inner class that defines the contents of the task table */
         public static final class USERS_ENTERY implements BaseColumns {
 
-            // TaskEntry content URI = base content URI + path
+            // UserEntry content URI = base content URI + path
             public static final Uri CONTENT_URI =
                     BASE_CONTENT_URI.buildUpon().appendPath(PATH_USERS).build();
 
@@ -29,6 +29,7 @@ public class UserContract {
             public static final String COLUMN_PASSWORD = "pass";
             public static final String COLUMN_EMAIL = "email";
             public static final String COLUMN_GENDER = "gender";
+            public static final String COLUMN_STATUS = "status";
 
 
         }

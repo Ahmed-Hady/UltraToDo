@@ -1,6 +1,7 @@
 package org.ultradevs.todolist.framgments;
 
 
+import android.app.Application;
 import android.content.ContentValues;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.ultradevs.todolist.R;
+import org.ultradevs.todolist.activities.MainActivity;
 import org.ultradevs.todolist.utils.UserContract;
 
 /**
@@ -54,7 +56,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
         return view ;
     }
-
+    public LoginFragment mLogin;
     @Override
     public void onClick(View v) {
 
@@ -63,20 +65,33 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         email = mEmail.getText().toString();
         gender = (int) mGender.getSelectedItemId();
 
-/*            ContentValues contentValues = new ContentValues();
+        if(name.length() > 0 && pass.length() > 0 && email.length() > 0) {
 
-            contentValues.put(UserContract.USERS_ENTERY.COLUMN_NAME, name);
-            contentValues.put(UserContract.USERS_ENTERY.COLUMN_PASSWORD, pass);
-            contentValues.put(UserContract.USERS_ENTERY.COLUMN_EMAIL, email);
-            contentValues.put(UserContract.USERS_E}NTERY.COLUMN_GENDER, String.valueOf(gender));
+            if(pass.length() > 5) {
+                ContentValues contentValues = new ContentValues();
 
-            Uri uri = getActivity().getContentResolver().insert(UserContract.USERS_ENTERY.CONTENT_URI, contentValues);
+                contentValues.put(UserContract.USERS_ENTERY.COLUMN_NAME, name);
+                contentValues.put(UserContract.USERS_ENTERY.COLUMN_PASSWORD, pass);
+                contentValues.put(UserContract.USERS_ENTERY.COLUMN_EMAIL, email);
+                contentValues.put(UserContract.USERS_ENTERY.COLUMN_GENDER, String.valueOf(gender));
+                contentValues.put(UserContract.USERS_ENTERY.COLUMN_STATUS, "0");
 
-            if(uri != null) {
-                Toast.makeText(getContext(), uri.toString(), Toast.LENGTH_LONG).show();
+                Uri uri = getContext().getContentResolver().insert(UserContract.USERS_ENTERY.CONTENT_URI, contentValues);
+
+                mLogin = new LoginFragment();
+
+                if (uri != null) {
+                    if(((MainActivity)getActivity()).CheckLogin() == false){
+                        ((MainActivity)getActivity()).updateFragment(mLogin);
+                    }
+                }
+            } else {
+                Toast.makeText(getContext(), "Password shouldn't be less than 6 letters !", Toast.LENGTH_LONG).show();
             }
+        } else {
+            Toast.makeText(getContext(), "Please Complete all fields !", Toast.LENGTH_LONG).show();
+        }
 
-*/
 
     }
 }

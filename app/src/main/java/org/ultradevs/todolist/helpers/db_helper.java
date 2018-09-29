@@ -21,15 +21,15 @@ public class db_helper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-            // Create tasks table (careful to follow SQL formatting rules)
-            final String CREATE_TABLE = "CREATE TABLE "  + USERS_ENTERY.TABLE_NAME + " (" +
+            // Create Users table (careful to follow SQL formatting rules)
+            final String CREATE_USERS_TABLE = "CREATE TABLE "  + USERS_ENTERY.TABLE_NAME + " (" +
                     USERS_ENTERY._ID                + " INTEGER PRIMARY KEY, " +
                     USERS_ENTERY.COLUMN_NAME + " VARCHAR(255) NOT NULL, " +
                     USERS_ENTERY.COLUMN_PASSWORD + " VARCHAR(255) NOT NULL, " +
                     USERS_ENTERY.COLUMN_EMAIL + " EMAIL NOT NULL, " +
                     USERS_ENTERY.COLUMN_GENDER    + " INTEGER NOT NULL);";
 
-            db.execSQL(CREATE_TABLE);
+            db.execSQL(CREATE_USERS_TABLE);
             db.close();
 
     }

@@ -10,13 +10,13 @@ import org.ultradevs.todolist.utils.UserContract.USERS_ENTERY;
 
 import static org.ultradevs.todolist.activities.MainActivity.LOG_TAG;
 
-public class users_db_helper extends SQLiteOpenHelper {
+public class db_helper extends SQLiteOpenHelper {
 
-    public static final String USER_DATABASE_NAME = "usersDB.db";
+    public static final String DATABASE_NAME = "UltraDB.db";
     private static final int VERSION = 1;
 
-    public users_db_helper(Context context) {
-        super(context, USER_DATABASE_NAME, null, VERSION);
+    public db_helper(Context context) {
+        super(context, DATABASE_NAME, null, VERSION);
     }
 
     @Override

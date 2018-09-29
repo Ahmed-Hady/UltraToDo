@@ -15,15 +15,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Spinner;
 
 import org.ultradevs.todolist.R;
 import org.ultradevs.todolist.framgments.LoginFragment;
 import org.ultradevs.todolist.framgments.RegisterFragment;
 
-import static org.ultradevs.todolist.helpers.users_db_helper.USER_DATABASE_NAME;
+import static org.ultradevs.todolist.helpers.db_helper.DATABASE_NAME;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -120,7 +117,7 @@ public class MainActivity extends AppCompatActivity
     public boolean CheckDB(){
         SQLiteDatabase db = null;
         try {
-            db = SQLiteDatabase.openDatabase(USER_DATABASE_NAME, null,
+            db = SQLiteDatabase.openDatabase(DATABASE_NAME, null,
                     SQLiteDatabase.OPEN_READWRITE);
             return true;
         } catch (SQLiteException e) {

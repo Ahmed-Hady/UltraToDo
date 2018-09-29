@@ -15,6 +15,13 @@
         <item>Female</item>
     </array>
 
+    <array name="task_priority">
+        <item>Height</item>
+        <item>Medium</item>
+        <item>Low</item>
+    </array>
+
+
     <string name="pass_error_msg">Password shouldn\'t be less than 6 letters !</string>
     <string name="comp_f_error_msg">Please Complete all fields !</string>
 

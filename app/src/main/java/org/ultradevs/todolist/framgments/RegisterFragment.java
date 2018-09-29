@@ -86,10 +86,10 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                     }
                 }
             } else {
-                Toast.makeText(getContext(), "Password shouldn't be less than 6 letters !", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), getString(R.string.pass_error_msg), Toast.LENGTH_LONG).show();
             }
         } else {
-            Toast.makeText(getContext(), "Please Complete all fields !", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), getString(R.string.comp_f_error_msg), Toast.LENGTH_LONG).show();
         }
 
 

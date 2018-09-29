@@ -13,10 +13,9 @@
         <item>Male</item>
         <item>Female</item>
     </array>
-    <array name="user_gender_values">
-        <item>1</item>
-        <item>2</item>
-    </array>
+
+    <string name="pass_error_msg">Password shouldn\'t be less than 6 letters !</string>
+    <string name="comp_f_error_msg">Please Complete all fields !</string>
 
     <string name="regBtn">Register</string>
     <!-- TODO: Remove or change this placeholder text -->

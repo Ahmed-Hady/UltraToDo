@@ -7,6 +7,8 @@
     <dimen name="pgTitle_text_size">22dp</dimen>
     <dimen name="pgTitle_padding">14dp</dimen>
     <dimen name="b_img_size">100dp</dimen>
+    <dimen name="b_img_margin_top">10dp</dimen>
+    <dimen name="reg_items_layout_padding">14dp</dimen>
     <dimen name="ed_icon_size">32dp</dimen>
     <dimen name="ed_tex_layout_margin_top">33dp</dimen>
     <dimen name="ed_tex_layout_margin_bottom">10dp</dimen>

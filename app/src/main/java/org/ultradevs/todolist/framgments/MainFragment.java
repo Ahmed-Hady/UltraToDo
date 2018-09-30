@@ -95,7 +95,16 @@ public class MainFragment extends Fragment implements
             // Called when a user swipes left or right on a ViewHolder
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                // Here is where you'll implement swipe to delete
+                int id = (int) viewHolder.itemView.getTag();
+
+                String stringId = Integer.toString(id);
+                Uri uri = TaskContract.TaskEntry.CONTENT_URI;
+                uri = uri.buildUpon().appendPath(stringId).build();
+                
+                getContext().getContentResolver().delete(uri, null, null);
+
+                getActivity().getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, MainFragment.this);
+
             }
         }).attachToRecyclerView(mRecyclerView);
 

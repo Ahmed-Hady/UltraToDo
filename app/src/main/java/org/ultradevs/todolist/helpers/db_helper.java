@@ -14,7 +14,7 @@ import static org.ultradevs.todolist.utils.UserContract.USERS_ENTERY.TABLE_NAME;
 
 public class db_helper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "UltraDB.db";
+    public static final String DATABASE_NAME = "UsersDB.db";
     private static final int VERSION = 1;
 
     public db_helper(Context context) {

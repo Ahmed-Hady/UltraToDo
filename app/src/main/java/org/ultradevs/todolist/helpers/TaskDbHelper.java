@@ -26,7 +26,7 @@ import org.ultradevs.todolist.utils.TaskContract;
 public class TaskDbHelper extends SQLiteOpenHelper {
 
     // The name of the database
-    public static final String DATABASE_NAME = "UltraDB.db";
+    public static final String DATABASE_NAME = "TaskDB.db";
 
     // If you change the database schema, you must increment the database version
     private static final int VERSION = 1;

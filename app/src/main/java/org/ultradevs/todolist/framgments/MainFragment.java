@@ -1,6 +1,7 @@
 package org.ultradevs.todolist.framgments;
 
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +19,11 @@ import android.view.ViewGroup;
 
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.ultradevs.todolist.R;
 import org.ultradevs.todolist.adapter.TaskCursorAdapter;
@@ -29,8 +35,15 @@ import static org.ultradevs.todolist.activities.MainActivity.LOG_TAG;
  * A simple {@link Fragment} subclass.
  */
 public class MainFragment extends Fragment implements
-        LoaderManager.LoaderCallbacks<Cursor> {
+        LoaderManager.LoaderCallbacks<Cursor>,
+        View.OnClickListener{
 
+    private EditText txtDesc;
+    private Spinner sPrio;
+
+    private String input;
+    private int mPriority;
+    private ImageButton addBtn;
     // Constants for logging and referring to a unique loader
     private static final int TASK_LOADER_ID = 0;
 
@@ -89,6 +102,12 @@ public class MainFragment extends Fragment implements
 
             }
         }).attachToRecyclerView(mRecyclerView);
+
+        addBtn = (ImageButton) view.findViewById(R.id.task_add_btn);
+        addBtn.setOnClickListener(this);
+
+        txtDesc = (EditText) view.findViewById(R.id.editTextTaskDescription);
+        sPrio = (Spinner) view.findViewById(R.id.prio);
 
         return view;
     }
@@ -152,5 +171,32 @@ public class MainFragment extends Fragment implements
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        // Not yet implemented
+        // Check if EditText is empty, if not retrieve input and store it in a ContentValues object
+        // If the EditText input is empty -> don't create an entry
+        input = txtDesc.getText().toString();
+        if (input.length() == 0) {
+            return;
+        }
+        mPriority = (int) sPrio.getSelectedItemId();
+
+        // Insert new task data via a ContentResolver
+        // Create new empty ContentValues object
+        ContentValues contentValues = new ContentValues();
+        // Put the task description and selected mPriority into the ContentValues
+        contentValues.put(TaskContract.TaskEntry.COLUMN_DESCRIPTION, input);
+        contentValues.put(TaskContract.TaskEntry.COLUMN_PRIORITY, mPriority);
+        // Insert the content values via a ContentResolver
+        Uri uri = getContext().getContentResolver().insert(TaskContract.TaskEntry.CONTENT_URI, contentValues);
+
+        // Display the URI that's returned with a Toast
+        // [Hint] Don't forget to call finish() to return to MainActivity after this insert is complete
+        if(uri != null) {
+            Toast.makeText(getContext(), uri.toString(), Toast.LENGTH_LONG).show();
+        }
     }
 }

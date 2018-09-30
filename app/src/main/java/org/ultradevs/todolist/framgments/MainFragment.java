@@ -100,7 +100,7 @@ public class MainFragment extends Fragment implements
                 String stringId = Integer.toString(id);
                 Uri uri = TaskContract.TaskEntry.CONTENT_URI;
                 uri = uri.buildUpon().appendPath(stringId).build();
-                
+
                 getContext().getContentResolver().delete(uri, null, null);
 
                 getActivity().getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, MainFragment.this);

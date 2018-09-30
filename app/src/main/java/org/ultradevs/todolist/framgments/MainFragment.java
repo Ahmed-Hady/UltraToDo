@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -44,12 +43,15 @@ public class MainFragment extends Fragment implements
     private String input;
     private int mPriority;
     private ImageButton addBtn;
+
     // Constants for logging and referring to a unique loader
     private static final int TASK_LOADER_ID = 0;
 
     // Member variables for the adapter and RecyclerView
     private TaskCursorAdapter mAdapter;
     RecyclerView mRecyclerView;
+
+
     public MainFragment() {
         // Required empty public constructor
     }
@@ -62,17 +64,28 @@ public class MainFragment extends Fragment implements
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
+        addBtn = (ImageButton) view.findViewById(R.id.task_add_btn);
+        addBtn.setOnClickListener(this);
+
+        txtDesc = (EditText) view.findViewById(R.id.editTextTaskDescription);
+        sPrio = (Spinner) view.findViewById(R.id.prio);
+
         // Set the RecyclerView to its corresponding view
         mRecyclerView = (RecyclerView) view.findViewById(R.id.task_list);
 
         // Set the layout for the RecyclerView to be a linear layout, which measures and
         // positions items within a RecyclerView into a linear list
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // Initialize the adapter and attach it to the RecyclerView
-        mAdapter = new TaskCursorAdapter(getActivity());
+        mAdapter = new TaskCursorAdapter(getContext());
         mRecyclerView.setAdapter(mAdapter);
 
+        /*
+         Add a touch helper to the RecyclerView to recognize when a user swipes to delete an item.
+         An ItemTouchHelper enables touch behavior (like swipe and move) on each ViewHolder,
+         and uses callbacks to signal when a user is performing these actions.
+         */
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
@@ -83,39 +96,30 @@ public class MainFragment extends Fragment implements
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 // Here is where you'll implement swipe to delete
-
-                // COMPLETED (1) Construct the URI for the item to delete
-                //[Hint] Use getTag (from the adapter code) to get the id of the swiped item
-                // Retrieve the id of the task to delete
-                int id = (int) viewHolder.itemView.getTag();
-
-                // Build appropriate uri with String row id appended
-                String stringId = Integer.toString(id);
-                Uri uri = TaskContract.TaskEntry.CONTENT_URI;
-                uri = uri.buildUpon().appendPath(stringId).build();
-
-                getActivity().getContentResolver().delete(uri, null, null);
-
-                getActivity().getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, MainFragment.this);
-
-                getActivity().getSupportLoaderManager().initLoader(TASK_LOADER_ID, null, MainFragment.this);
-
             }
         }).attachToRecyclerView(mRecyclerView);
 
-        addBtn = (ImageButton) view.findViewById(R.id.task_add_btn);
-        addBtn.setOnClickListener(this);
-
-        txtDesc = (EditText) view.findViewById(R.id.editTextTaskDescription);
-        sPrio = (Spinner) view.findViewById(R.id.prio);
+        /*
+         Ensure a loader is initialized and active. If the loader doesn't already exist, one is
+         created, otherwise the last created loader is re-used.
+         */
+        getActivity().getSupportLoaderManager().initLoader(TASK_LOADER_ID, null, this);
 
         return view;
     }
 
-    @NonNull
     @Override
-    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        return new AsyncTaskLoader<Cursor>(getActivity()) {
+    public void onResume() {
+        super.onResume();
+
+        // re-queries for all tasks
+        getActivity().getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, this);
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, final Bundle loaderArgs) {
+
+        return new AsyncTaskLoader<Cursor>(getContext()) {
 
             // Initialize a Cursor, this will hold all the task data
             Cursor mTaskData = null;
@@ -137,11 +141,11 @@ public class MainFragment extends Fragment implements
             public Cursor loadInBackground() {
                 // Will implement to load data
 
-                // Query and load all task data in the background; sort by priority
+                // COMPLETED (5) Query and load all task data in the background; sort by priority
                 // [Hint] use a try/catch block to catch any errors in loading data
 
                 try {
-                    return getActivity().getContentResolver().query(TaskContract.TaskEntry.CONTENT_URI,
+                    return getContext().getContentResolver().query(TaskContract.TaskEntry.CONTENT_URI,
                             null,
                             null,
                             null,
@@ -164,13 +168,14 @@ public class MainFragment extends Fragment implements
     }
 
     @Override
-    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
-
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        // Update the data that the adapter uses to create ViewHolders
+        mAdapter.swapCursor(data);
     }
 
     @Override
-    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
-
+    public void onLoaderReset(Loader<Cursor> loader) {
+        mAdapter.swapCursor(null);
     }
 
     @Override

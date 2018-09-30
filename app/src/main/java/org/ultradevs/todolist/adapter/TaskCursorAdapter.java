@@ -80,17 +80,23 @@ public class TaskCursorAdapter extends RecyclerView.Adapter<TaskCursorAdapter.Ta
         int idIndex = mCursor.getColumnIndex(TaskContract.TaskEntry._ID);
         int descriptionIndex = mCursor.getColumnIndex(TaskContract.TaskEntry.COLUMN_DESCRIPTION);
         int priorityIndex = mCursor.getColumnIndex(TaskContract.TaskEntry.COLUMN_PRIORITY);
+        int timeIndex = mCursor.getColumnIndex(TaskContract.TaskEntry.COLUMN_TIME);
+        int dateIndex = mCursor.getColumnIndex(TaskContract.TaskEntry.COLUMN_DATE);
 
         mCursor.moveToPosition(position); // get to the right location in the cursor
 
         // Determine the values of the wanted data
         final int id = mCursor.getInt(idIndex);
         String description = mCursor.getString(descriptionIndex);
+        String date = mCursor.getString(dateIndex);
+        String time = mCursor.getString(timeIndex);
         int priority = mCursor.getInt(priorityIndex);
 
         //Set values
         holder.itemView.setTag(id);
         holder.taskDescriptionView.setText(description);
+        holder.DateView.setText(date);
+        holder.TimeView.setText(time);
 
         // Programmatically set the text and color for the priority TextView
         String priorityString = "" + priority; // converts int to String
@@ -162,6 +168,8 @@ public class TaskCursorAdapter extends RecyclerView.Adapter<TaskCursorAdapter.Ta
         // Class variables for the task description and priority TextViews
         TextView taskDescriptionView;
         TextView priorityView;
+        TextView DateView;
+        TextView TimeView;
 
         /**
          * Constructor for the TaskViewHolders.
@@ -173,6 +181,8 @@ public class TaskCursorAdapter extends RecyclerView.Adapter<TaskCursorAdapter.Ta
 
             taskDescriptionView = (TextView) itemView.findViewById(R.id.taskDescription);
             priorityView = (TextView) itemView.findViewById(R.id.priorityTextView);
+            DateView = (TextView) itemView.findViewById(R.id.date_txt);
+            TimeView = (TextView) itemView.findViewById(R.id.time_txt);
         }
     }
 }

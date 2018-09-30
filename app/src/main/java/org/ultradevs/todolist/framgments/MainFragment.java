@@ -10,6 +10,7 @@ import android.support.v4.content.AsyncTaskLoader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,12 @@ import android.widget.Toast;
 import org.ultradevs.todolist.R;
 import org.ultradevs.todolist.adapter.TaskCursorAdapter;
 import org.ultradevs.todolist.utils.TaskContract;
+
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Timer;
 
 import static org.ultradevs.todolist.activities.MainActivity.LOG_TAG;
 
@@ -175,9 +182,17 @@ public class MainFragment extends Fragment implements
         }
         mPriority = (int) sPrio.getSelectedItemId();
 
+        String date = new SimpleDateFormat("dd/mm/yyyy").format(new Date());
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm");
+
         ContentValues contentValues = new ContentValues();
         contentValues.put(TaskContract.TaskEntry.COLUMN_DESCRIPTION, input);
         contentValues.put(TaskContract.TaskEntry.COLUMN_PRIORITY, mPriority);
+        contentValues.put(TaskContract.TaskEntry.COLUMN_DATE, date);
+        contentValues.put(TaskContract.TaskEntry.COLUMN_TIME, mdformat.format(calendar.getTime()));
+
         Uri uri = getContext().getContentResolver().insert(TaskContract.TaskEntry.CONTENT_URI, contentValues);
 
         if(uri != null) {

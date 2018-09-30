@@ -12,4 +12,7 @@
     <dimen name="ed_icon_size">32dp</dimen>
     <dimen name="ed_tex_layout_margin_top">33dp</dimen>
     <dimen name="ed_tex_layout_margin_bottom">10dp</dimen>
+    <dimen name="desc_txt_size">250dp</dimen>
+    <dimen name="desc_text_margin">12dp</dimen>
+    <dimen name="lin_box_margin">6dp</dimen>
 </resources>

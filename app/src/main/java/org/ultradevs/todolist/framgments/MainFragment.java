@@ -5,8 +5,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v7.widget.LinearLayoutManager;
@@ -61,7 +59,6 @@ public class MainFragment extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
         addBtn = (ImageButton) view.findViewById(R.id.task_add_btn);
@@ -70,22 +67,14 @@ public class MainFragment extends Fragment implements
         txtDesc = (EditText) view.findViewById(R.id.editTextTaskDescription);
         sPrio = (Spinner) view.findViewById(R.id.prio);
 
-        // Set the RecyclerView to its corresponding view
         mRecyclerView = (RecyclerView) view.findViewById(R.id.task_list);
 
-        // Set the layout for the RecyclerView to be a linear layout, which measures and
-        // positions items within a RecyclerView into a linear list
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // Initialize the adapter and attach it to the RecyclerView
         mAdapter = new TaskCursorAdapter(getContext());
         mRecyclerView.setAdapter(mAdapter);
 
-        /*
-         Add a touch helper to the RecyclerView to recognize when a user swipes to delete an item.
-         An ItemTouchHelper enables touch behavior (like swipe and move) on each ViewHolder,
-         and uses callbacks to signal when a user is performing these actions.
-         */
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
@@ -108,10 +97,6 @@ public class MainFragment extends Fragment implements
             }
         }).attachToRecyclerView(mRecyclerView);
 
-        /*
-         Ensure a loader is initialized and active. If the loader doesn't already exist, one is
-         created, otherwise the last created loader is re-used.
-         */
         getActivity().getSupportLoaderManager().initLoader(TASK_LOADER_ID, null, this);
 
         return view;
@@ -148,11 +133,6 @@ public class MainFragment extends Fragment implements
             // loadInBackground() performs asynchronous loading of data
             @Override
             public Cursor loadInBackground() {
-                // Will implement to load data
-
-                // COMPLETED (5) Query and load all task data in the background; sort by priority
-                // [Hint] use a try/catch block to catch any errors in loading data
-
                 try {
                     return getContext().getContentResolver().query(TaskContract.TaskEntry.CONTENT_URI,
                             null,
@@ -189,26 +169,17 @@ public class MainFragment extends Fragment implements
 
     @Override
     public void onClick(View v) {
-        // Not yet implemented
-        // Check if EditText is empty, if not retrieve input and store it in a ContentValues object
-        // If the EditText input is empty -> don't create an entry
         input = txtDesc.getText().toString();
         if (input.length() == 0) {
             return;
         }
         mPriority = (int) sPrio.getSelectedItemId();
 
-        // Insert new task data via a ContentResolver
-        // Create new empty ContentValues object
         ContentValues contentValues = new ContentValues();
-        // Put the task description and selected mPriority into the ContentValues
         contentValues.put(TaskContract.TaskEntry.COLUMN_DESCRIPTION, input);
         contentValues.put(TaskContract.TaskEntry.COLUMN_PRIORITY, mPriority);
-        // Insert the content values via a ContentResolver
         Uri uri = getContext().getContentResolver().insert(TaskContract.TaskEntry.CONTENT_URI, contentValues);
 
-        // Display the URI that's returned with a Toast
-        // [Hint] Don't forget to call finish() to return to MainActivity after this insert is complete
         if(uri != null) {
             Toast.makeText(getContext(), "Task Added !", Toast.LENGTH_LONG).show();
             txtDesc.setText("");

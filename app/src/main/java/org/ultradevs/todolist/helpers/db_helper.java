@@ -34,8 +34,6 @@ public class db_helper extends SQLiteOpenHelper {
                     USERS_ENTERY.COLUMN_GENDER    + " VARCHAR(255) NOT NULL);";
 
             db.execSQL(CREATE_USERS_TABLE);
-        //    db.close();
-
     }
 
     public int getUsersCount() {

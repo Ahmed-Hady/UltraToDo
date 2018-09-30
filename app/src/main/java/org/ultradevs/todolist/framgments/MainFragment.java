@@ -210,7 +210,9 @@ public class MainFragment extends Fragment implements
         // Display the URI that's returned with a Toast
         // [Hint] Don't forget to call finish() to return to MainActivity after this insert is complete
         if(uri != null) {
-            Toast.makeText(getContext(), uri.toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Task Added !", Toast.LENGTH_LONG).show();
+            txtDesc.setText("");
+            getActivity().getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, this);
         }
     }
 }

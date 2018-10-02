@@ -41,4 +41,9 @@
         <item name="android:backgroundTint">@color/colorAccent</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
+
+    <style name="AppTheme.oldTasks">
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textStyle">italic</item>
+    </style>
 </resources>

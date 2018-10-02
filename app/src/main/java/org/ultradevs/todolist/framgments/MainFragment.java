@@ -178,7 +178,7 @@ public class MainFragment extends Fragment implements
         }
         mPriority = (int) sPrio.getSelectedItemId();
 
-        String date = new SimpleDateFormat("dd/mm/yyyy").format(new Date());
+        String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
 
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm");

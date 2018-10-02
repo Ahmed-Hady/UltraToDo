@@ -19,6 +19,7 @@ package org.ultradevs.todolist.adapter;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,6 +29,9 @@ import android.widget.TextView;
 
 import org.ultradevs.todolist.R;
 import org.ultradevs.todolist.utils.TaskContract;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 /**
@@ -106,6 +110,16 @@ public class TaskCursorAdapter extends RecyclerView.Adapter<TaskCursorAdapter.Ta
         // Get the appropriate background color based on the priority
         int priorityColor = getPriorityColor(priority);
         priorityCircle.setColor(priorityColor);
+
+        String today = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+        if(date.equals(today)) {
+        }else{
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                holder.taskDescriptionView.setTextAppearance(R.style.AppTheme_oldTasks);
+                holder.DateView.setTextAppearance(R.style.AppTheme_oldTasks);
+                holder.TimeView.setTextAppearance(R.style.AppTheme_oldTasks);
+            }
+        }
 
     }
 

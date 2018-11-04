@@ -141,7 +141,7 @@ public class MainFragment extends Fragment implements
                             null,
                             null,
                             null,
-                            TaskContract.TaskEntry.COLUMN_PRIORITY);
+                            TaskContract.TaskEntry._ID);
 
                 } catch (Exception e) {
                     Log.e(LOG_TAG, "Failed to asynchronously load data.");

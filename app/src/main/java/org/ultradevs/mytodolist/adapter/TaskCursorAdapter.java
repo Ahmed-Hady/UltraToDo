@@ -25,6 +25,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import org.ultradevs.mytodolist.R;
@@ -96,6 +97,19 @@ public class TaskCursorAdapter extends RecyclerView.Adapter<TaskCursorAdapter.Ta
         String time = mCursor.getString(timeIndex);
         int priority = mCursor.getInt(priorityIndex);
 
+        String prio_str = null;
+        switch (priority){
+            case 0:
+                prio_str = "H";
+                break;
+            case 1:
+                prio_str = "M";
+                break;
+            case 2:
+                prio_str = "L";
+                break;
+        }
+
         //Set values
         holder.itemView.setTag(id);
         holder.taskDescriptionView.setText(description);
@@ -103,7 +117,7 @@ public class TaskCursorAdapter extends RecyclerView.Adapter<TaskCursorAdapter.Ta
         holder.TimeView.setText(time);
 
         // Programmatically set the text and color for the priority TextView
-        String priorityString = "" + priority; // converts int to String
+        String priorityString = prio_str;
         holder.priorityView.setText(priorityString);
 
         GradientDrawable priorityCircle = (GradientDrawable) holder.priorityView.getBackground();

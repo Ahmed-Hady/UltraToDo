@@ -21,9 +21,9 @@
         </activity>
 
         <provider
-            android:name="org.ultradevs.mytodolist.providers.TaskContentProvider"
+            android:name=".providers.TaskContentProvider"
             android:authorities="org.ultradevs.todolist"
-            android:exported="false"/>
+            android:exported="false" />
 
     </application>
 

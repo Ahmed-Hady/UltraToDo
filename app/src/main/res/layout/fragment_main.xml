@@ -7,67 +7,74 @@
     tools:context=".framgments.MainFragment">
 
     <LinearLayout
+        android:background="@color/colorAccent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/rounded_text"
-        android:padding="3dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:layout_margin="8dp"
-        android:elevation="3dp">
+        android:minHeight="@dimen/ed_tex_layout_height"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:padding="@dimen/ed_tex_layout_margin"
+        android:paddingTop="@dimen/ed_tex_layout_margin_top"
+        android:paddingBottom="@dimen/ed_tex_layout_margin_bottom"
+        android:gravity="center_vertical|center|start"
+        android:elevation="6dp"
+        android:orientation="horizontal">
 
-        <EditText
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/editTextTaskDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/desc_text_margin"
-            android:background="@android:color/white"
-            android:minWidth="@dimen/desc_txt_size"
+            android:background="@drawable/rounded_text"
             android:maxWidth="@dimen/desc_txt_size"
+            android:minWidth="@dimen/desc_txt_size"
+            android:padding="4dp"
+            android:paddingStart="8dp"
             android:singleLine="true"
-            android:padding="@dimen/desc_text_margin" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp" />
+
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_marginStart="@dimen/lin_box_margin">
+            android:layout_marginStart="@dimen/lin_box_margin"
+            android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/task_add_btn"
-                android:background="@android:color/transparent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
                 android:src="@drawable/ic_add_circle_outline"
-                android:tint="@color/colorAccent" />
+                android:tint="@color/colorPrimary" />
+
+            <ImageButton
+                android:id="@+id/task_find_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_search_black"
+                android:tint="@color/colorPrimary" />
 
             <Spinner
                 android:id="@+id/prio"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/lin_box_margin"
-                android:backgroundTint="@color/colorAccent"
+                android:backgroundTint="@color/colorPrimary"
                 android:entries="@array/task_priority"
                 android:spinnerMode="dialog">
-
             </Spinner>
         </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
+    <android.support.v7.widget.RecyclerView
+        android:background="@color/colorPrimary"
+        android:id="@+id/task_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/task_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </android.support.v7.widget.RecyclerView>
-
-    </LinearLayout>
-
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
 </LinearLayout>

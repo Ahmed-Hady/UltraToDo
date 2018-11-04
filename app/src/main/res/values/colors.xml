@@ -6,6 +6,8 @@
 
     <color name="black_overlay">#66000000</color>
 
+    <color name="color_black_87">#57000000</color>
+
     <!-- colors for task priority selection -->
     <color name="materialRed">#E74C3C</color>
     <color name="materialOrange">#E67E22</color>

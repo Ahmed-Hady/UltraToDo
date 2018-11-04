@@ -38,7 +38,7 @@ public class MainFragment extends Fragment implements
         LoaderManager.LoaderCallbacks<Cursor>,
         View.OnClickListener{
 
-    private EditText txtDesc;
+    private android.support.design.widget.TextInputEditText txtDesc;
     private Spinner sPrio;
 
     private String input;
@@ -67,7 +67,7 @@ public class MainFragment extends Fragment implements
         addBtn = (ImageButton) view.findViewById(R.id.task_add_btn);
         addBtn.setOnClickListener(this);
 
-        txtDesc = (EditText) view.findViewById(R.id.editTextTaskDescription);
+        txtDesc = (android.support.design.widget.TextInputEditText) view.findViewById(R.id.editTextTaskDescription);
         sPrio = (Spinner) view.findViewById(R.id.prio);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.task_list);

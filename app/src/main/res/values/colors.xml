@@ -9,9 +9,9 @@
     <color name="color_black_87">#57000000</color>
 
     <!-- colors for task priority selection -->
-    <color name="materialRed">#E74C3C</color>
-    <color name="materialOrange">#E67E22</color>
-    <color name="materialYellow">#F1C40F</color>
+    <color name="materialHigh">#f17c8e</color>
+    <color name="materialMid">#22a1e6</color>
+    <color name="materialLow">#0ff180</color>
 
     <color name="grey">#c1c1c1</color>
 </resources>

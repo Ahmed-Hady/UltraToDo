@@ -1,4 +1,4 @@
-package org.ultradevs.todolist.framgments;
+package org.ultradevs.mytodolist.framgments;
 
 
 import android.app.Application;
@@ -17,12 +17,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import org.ultradevs.todolist.R;
-import org.ultradevs.todolist.activities.MainActivity;
-import org.ultradevs.todolist.helpers.db_helper;
-import org.ultradevs.todolist.utils.UserContract;
+import org.ultradevs.mytodolist.R;
+import org.ultradevs.mytodolist.activities.MainActivity;
+import org.ultradevs.mytodolist.helpers.db_helper;
+import org.ultradevs.mytodolist.utils.UserContract;
 
-import static org.ultradevs.todolist.activities.MainActivity.LOG_TAG;
+import static org.ultradevs.mytodolist.activities.MainActivity.LOG_TAG;
 
 /**
  * A simple {@link Fragment} subclass.

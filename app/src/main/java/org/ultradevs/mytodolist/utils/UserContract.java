@@ -1,4 +1,4 @@
-package org.ultradevs.todolist.utils;
+package org.ultradevs.mytodolist.utils;
 
 import android.net.Uri;
 import android.provider.BaseColumns;

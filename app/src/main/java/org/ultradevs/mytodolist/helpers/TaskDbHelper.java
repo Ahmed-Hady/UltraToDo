@@ -14,13 +14,13 @@
 * limitations under the License.
 */
 
-package org.ultradevs.todolist.helpers;
+package org.ultradevs.mytodolist.helpers;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import org.ultradevs.todolist.utils.TaskContract;
+import org.ultradevs.mytodolist.utils.TaskContract;
 
 
 public class TaskDbHelper extends SQLiteOpenHelper {

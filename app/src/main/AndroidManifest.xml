@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.ultradevs.todolist">
+    package="org.ultradevs.mytodolist">
 
     <application
         android:allowBackup="true"
@@ -21,7 +21,7 @@
         </activity>
 
         <provider
-            android:name="org.ultradevs.todolist.providers.TaskContentProvider"
+            android:name="org.ultradevs.mytodolist.providers.TaskContentProvider"
             android:authorities="org.ultradevs.todolist"
             android:exported="false"/>
 

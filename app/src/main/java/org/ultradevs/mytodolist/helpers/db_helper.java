@@ -1,4 +1,4 @@
-package org.ultradevs.todolist.helpers;
+package org.ultradevs.mytodolist.helpers;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -7,10 +7,10 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import org.ultradevs.todolist.utils.UserContract.USERS_ENTERY;
+import org.ultradevs.mytodolist.utils.UserContract.USERS_ENTERY;
 
-import static org.ultradevs.todolist.activities.MainActivity.LOG_TAG;
-import static org.ultradevs.todolist.utils.UserContract.USERS_ENTERY.TABLE_NAME;
+import static org.ultradevs.mytodolist.activities.MainActivity.LOG_TAG;
+import static org.ultradevs.mytodolist.utils.UserContract.USERS_ENTERY.TABLE_NAME;
 
 public class db_helper extends SQLiteOpenHelper {
 

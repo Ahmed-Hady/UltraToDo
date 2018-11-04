@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package org.ultradevs.todolist.adapter;
+package org.ultradevs.mytodolist.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -27,8 +27,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.ultradevs.todolist.R;
-import org.ultradevs.todolist.utils.TaskContract;
+import org.ultradevs.mytodolist.R;
+import org.ultradevs.mytodolist.utils.TaskContract;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

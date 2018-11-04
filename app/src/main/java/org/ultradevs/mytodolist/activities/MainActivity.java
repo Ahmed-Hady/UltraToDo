@@ -1,4 +1,4 @@
-package org.ultradevs.todolist.activities;
+package org.ultradevs.mytodolist.activities;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -14,11 +14,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import org.ultradevs.todolist.R;
-import org.ultradevs.todolist.framgments.LoginFragment;
-import org.ultradevs.todolist.framgments.MainFragment;
-import org.ultradevs.todolist.framgments.RegisterFragment;
-import org.ultradevs.todolist.helpers.db_helper;
+import org.ultradevs.mytodolist.R;
+import org.ultradevs.mytodolist.framgments.LoginFragment;
+import org.ultradevs.mytodolist.framgments.MainFragment;
+import org.ultradevs.mytodolist.framgments.RegisterFragment;
+import org.ultradevs.mytodolist.helpers.db_helper;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

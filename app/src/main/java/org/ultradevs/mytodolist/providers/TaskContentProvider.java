@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package org.ultradevs.todolist.providers;
+package org.ultradevs.mytodolist.providers;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -26,10 +26,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
-import org.ultradevs.todolist.helpers.TaskDbHelper;
-import org.ultradevs.todolist.utils.TaskContract;
+import org.ultradevs.mytodolist.helpers.TaskDbHelper;
+import org.ultradevs.mytodolist.utils.TaskContract;
 
-import static org.ultradevs.todolist.utils.TaskContract.TaskEntry.TABLE_NAME;
+import static org.ultradevs.mytodolist.utils.TaskContract.TaskEntry.TABLE_NAME;
 
 // Verify that TaskContentProvider extends from ContentProvider and implements required methods
 public class TaskContentProvider extends ContentProvider {

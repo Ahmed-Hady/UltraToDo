@@ -1,4 +1,4 @@
-package org.ultradevs.todolist.framgments;
+package org.ultradevs.mytodolist.framgments;
 
 
 import android.content.ContentValues;
@@ -21,15 +21,15 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import org.ultradevs.todolist.R;
-import org.ultradevs.todolist.adapter.TaskCursorAdapter;
-import org.ultradevs.todolist.utils.TaskContract;
+import org.ultradevs.mytodolist.R;
+import org.ultradevs.mytodolist.adapter.TaskCursorAdapter;
+import org.ultradevs.mytodolist.utils.TaskContract;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import static org.ultradevs.todolist.activities.MainActivity.LOG_TAG;
+import static org.ultradevs.mytodolist.activities.MainActivity.LOG_TAG;
 
 /**
  * A simple {@link Fragment} subclass.

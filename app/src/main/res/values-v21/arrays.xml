@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="ld_activityScreenTitles">
+        <item>Today Tasks</item>
+        <item>Completed Today</item>
+        <item>Old Tasks</item>
+        <item>Settings</item>
+        <item />
+        <item>Log Out</item>
+    </string-array>
+
+    <array name="ld_activityScreenIcons">
+        <item>@drawable/ic_toc_black_24dp</item>
+        <item>@drawable/ic_completed</item>
+        <item>@drawable/ic_archived</item>
+        <item>@drawable/ic_settings</item>
+        <item>0</item>
+        <item>@drawable/ic_logout</item>
+    </array>
+
+</resources>

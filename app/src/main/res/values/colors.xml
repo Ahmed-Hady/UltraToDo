@@ -14,4 +14,7 @@
     <color name="materialLow">#0ff180</color>
 
     <color name="grey">#c1c1c1</color>
+
+    <color name="textColorPrimary">#212121</color>
+    <color name="textColorSecondary">#757575</color>
 </resources>

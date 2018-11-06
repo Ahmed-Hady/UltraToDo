@@ -72,7 +72,7 @@ public class LoginFragment extends Fragment
         try {
             sqlDB.execSQL(sql);
             if(((MainActivity)getActivity()).CheckLogin() == true) {
-                ((MainActivity) getActivity()).SetDrawers();
+                ((MainActivity) getActivity()).SetDrawer(true);
                 ((MainActivity) getActivity()).updateFragment(((MainActivity) getActivity()).mMain);
             } else {
                 Toast.makeText(getContext(), "Login Failed ! .. Please try again", Toast.LENGTH_LONG).show();

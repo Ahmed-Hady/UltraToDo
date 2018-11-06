@@ -12,7 +12,8 @@
     <dimen name="ed_icon_size">32dp</dimen>
     <dimen name="ed_tex_layout_margin_top">10dp</dimen>
     <dimen name="ed_tex_layout_margin_bottom">@dimen/ed_tex_layout_margin_top</dimen>
-    <dimen name="ed_tex_layout_height">30dp</dimen>
+    <dimen name="ed_tex_layout_height">70dp</dimen>
+    <dimen name="ed_tex_layout_height_exp">100dp</dimen>
     <dimen name="ed_tex_layout_margin">6dp</dimen>
     <dimen name="desc_txt_size">250dp</dimen>
     <dimen name="desc_text_margin">6dp</dimen>

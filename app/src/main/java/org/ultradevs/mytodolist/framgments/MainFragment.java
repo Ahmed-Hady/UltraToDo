@@ -1,6 +1,7 @@
 package org.ultradevs.mytodolist.framgments;
 
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
@@ -12,12 +13,21 @@ import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.transition.ChangeBounds;
+import android.transition.TransitionManager;
+import android.transition.TransitionSet;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
+import android.view.animation.Transformation;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -36,7 +46,8 @@ import static org.ultradevs.mytodolist.activities.MainActivity.LOG_TAG;
  */
 public class MainFragment extends Fragment implements
         LoaderManager.LoaderCallbacks<Cursor>,
-        View.OnClickListener{
+        View.OnClickListener,
+        View.OnTouchListener {
 
     private android.support.design.widget.TextInputEditText txtDesc;
     private Spinner sPrio;
@@ -44,6 +55,8 @@ public class MainFragment extends Fragment implements
     private String input;
     private int mPriority;
     private ImageButton addBtn;
+    private LinearLayout add_box;
+    boolean initialSizeObtained = false;
 
     // Constants for logging and referring to a unique loader
     private static final int TASK_LOADER_ID = 0;
@@ -78,6 +91,9 @@ public class MainFragment extends Fragment implements
         mAdapter = new TaskCursorAdapter(getContext());
         mRecyclerView.setAdapter(mAdapter);
 
+        add_box = (LinearLayout) view.findViewById(R.id.add_box);
+        add_box.setOnTouchListener(this);
+
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
@@ -99,6 +115,7 @@ public class MainFragment extends Fragment implements
 
             }
         }).attachToRecyclerView(mRecyclerView);
+
 
         getActivity().getSupportLoaderManager().initLoader(TASK_LOADER_ID, null, this);
 
@@ -196,5 +213,95 @@ public class MainFragment extends Fragment implements
             txtDesc.setText("");
             getActivity().getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, this);
         }
+    }
+
+    static final int MIN_DISTANCE = 100;
+    private float downX, downY, upX, upY;
+
+    public void onRightToLeftSwipe() {
+    }
+    public void onLeftToRightSwipe() {
+    }
+    public void onTopToBottomSwipe() {
+        int new_height = add_box.getHeight() * 2;
+        //LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(add_box.getWidth(),new_height);
+        //add_box.setLayoutParams(params);
+        //add_box.requestLayout();
+        //Toast.makeText(getContext(), "onTopToBottomSwipe", Toast.LENGTH_SHORT).show();
+
+        boolean expanded = true;
+        TransitionManager.beginDelayedTransition(add_box, new TransitionSet()
+                .addTransition(new ChangeBounds()));
+
+        ViewGroup.LayoutParams oldparams = add_box.getLayoutParams();
+        expanded = !expanded;
+        oldparams.height = expanded ? oldparams.height :
+                new_height;
+        add_box.setLayoutParams(oldparams);
+    }
+    public void onBottomToTopSwipe() {
+        int new_height = add_box.getHeight() / 2;
+        boolean unexpanded = true;
+        TransitionManager.beginDelayedTransition(add_box, new TransitionSet()
+                .addTransition(new ChangeBounds()));
+
+        ViewGroup.LayoutParams oldparams = add_box.getLayoutParams();
+        unexpanded = !unexpanded;
+        oldparams.height = unexpanded ? oldparams.height :
+                new_height;
+        add_box.setLayoutParams(oldparams);
+      //  Toast.makeText(getContext(), "onBottomToTopSwipe", Toast.LENGTH_SHORT).show();
+    }
+
+    public boolean onTouch(View v, MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN: {
+                downX = event.getX();
+                downY = event.getY();
+                return true;
+            }
+            case MotionEvent.ACTION_UP: {
+                upX = event.getX();
+                upY = event.getY();
+
+                float deltaX = downX - upX;
+                float deltaY = downY - upY;
+
+                // swipe horizontal?
+                if (Math.abs(deltaX) > MIN_DISTANCE) {
+                    // left or right
+                    if (deltaX < 0) {
+                        this.onLeftToRightSwipe();
+                        return true;
+                    }
+                    if (deltaX > 0) {
+                        this.onRightToLeftSwipe();
+                        return true;
+                    }
+                } else {
+                    Log.i(LOG_TAG, "Swipe was only " + Math.abs(deltaX) + " long horizontally, need at least " + MIN_DISTANCE);
+                    // return false; // We don't consume the event
+                }
+
+                // swipe vertical?
+                if (Math.abs(deltaY) > MIN_DISTANCE) {
+                    // top or down
+                    if (deltaY < 0) {
+                        this.onTopToBottomSwipe();
+                        return true;
+                    }
+                    if (deltaY > 0) {
+                        this.onBottomToTopSwipe();
+                        return true;
+                    }
+                } else {
+                    Log.i(LOG_TAG, "Swipe was only " + Math.abs(deltaX) + " long vertically, need at least " + MIN_DISTANCE);
+                    // return false; // We don't consume the event
+                }
+
+                return false; // no swipe horizontally and no swipe vertically
+            }// case MotionEvent.ACTION_UP:
+        }
+        return false;
     }
 }

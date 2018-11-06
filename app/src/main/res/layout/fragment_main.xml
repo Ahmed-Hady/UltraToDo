@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:id="@+id/add_box"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="@dimen/ed_tex_layout_height"
@@ -19,7 +19,6 @@
         android:paddingTop="@dimen/ed_tex_layout_margin_top"
         android:paddingBottom="@dimen/ed_tex_layout_margin_bottom"
         android:gravity="center_vertical|center|start"
-        android:elevation="6dp"
         android:orientation="horizontal">
 
         <android.support.design.widget.TextInputEditText
@@ -32,7 +31,7 @@
             android:padding="4dp"
             android:paddingStart="8dp"
             android:singleLine="true"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/textColorPrimary"
             android:textSize="20sp" />
 
 
@@ -49,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_add_circle_outline"
-                android:tint="@color/colorPrimary" />
+                android:tint="@color/colorAccent" />
 
             <ImageButton
                 android:id="@+id/task_find_btn"
@@ -57,14 +56,14 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_search_black"
-                android:tint="@color/colorPrimary" />
+                android:tint="@color/colorAccent" />
 
             <Spinner
                 android:id="@+id/prio"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/lin_box_margin"
-                android:backgroundTint="@color/colorPrimary"
+                android:backgroundTint="@color/colorAccent"
                 android:entries="@array/task_priority"
                 android:spinnerMode="dialog">
             </Spinner>

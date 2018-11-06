@@ -6,9 +6,9 @@
 
     <color name="black_overlay">#66000000</color>
 
-    <color name="color_black_87">#57000000</color>
-
+    <color name="color_black_32">#20000000</color>
     <color name="color_black_71">#47000000</color>
+    <color name="color_black_87">#57000000</color>
 
     <!-- colors for task priority selection -->
     <color name="materialHigh">#fdd7dc</color>

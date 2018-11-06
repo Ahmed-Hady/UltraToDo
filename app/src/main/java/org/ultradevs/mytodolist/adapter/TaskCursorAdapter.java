@@ -25,6 +25,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -120,10 +121,10 @@ public class TaskCursorAdapter extends RecyclerView.Adapter<TaskCursorAdapter.Ta
         String priorityString = prio_str;
         holder.priorityView.setText(priorityString);
 
-        GradientDrawable priorityCircle = (GradientDrawable) holder.priorityView.getBackground();
+        GradientDrawable taskbox = (GradientDrawable) holder.TaskBox.getBackground();
         // Get the appropriate background color based on the priority
         int priorityColor = getPriorityColor(priority);
-        priorityCircle.setColor(priorityColor);
+        taskbox.setColor(priorityColor);
 
         String today = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
         if(date.equals(today)) {
@@ -198,6 +199,7 @@ public class TaskCursorAdapter extends RecyclerView.Adapter<TaskCursorAdapter.Ta
         TextView priorityView;
         TextView DateView;
         TextView TimeView;
+        LinearLayout TaskBox;
 
         /**
          * Constructor for the TaskViewHolders.
@@ -211,6 +213,7 @@ public class TaskCursorAdapter extends RecyclerView.Adapter<TaskCursorAdapter.Ta
             priorityView = (TextView) itemView.findViewById(R.id.priorityTextView);
             DateView = (TextView) itemView.findViewById(R.id.date_txt);
             TimeView = (TextView) itemView.findViewById(R.id.time_txt);
+            TaskBox = (LinearLayout) itemView.findViewById(R.id.task_box);
         }
     }
 }

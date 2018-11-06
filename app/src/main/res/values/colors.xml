@@ -8,10 +8,12 @@
 
     <color name="color_black_87">#57000000</color>
 
+    <color name="color_black_71">#47000000</color>
+
     <!-- colors for task priority selection -->
-    <color name="materialHigh">#f17c8e</color>
-    <color name="materialMid">#22a1e6</color>
-    <color name="materialLow">#0ff180</color>
+    <color name="materialHigh">#fdd7dc</color>
+    <color name="materialMid">#bcdbec</color>
+    <color name="materialLow">#99f7c8</color>
 
     <color name="grey">#c1c1c1</color>
     <color name="lightgrey">#ececec</color>

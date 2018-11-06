@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:minHeight="@dimen/ed_tex_layout_height"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="0dp"
         android:layout_marginTop="15dp"
         android:padding="@dimen/ed_tex_layout_margin"
         android:paddingTop="@dimen/ed_tex_layout_margin_top"
@@ -77,6 +77,8 @@
         android:id="@+id/task_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
     </android.support.v7.widget.RecyclerView>
 </LinearLayout>

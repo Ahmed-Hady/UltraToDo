@@ -4,6 +4,8 @@ package org.ultradevs.mytodolist.framgments;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,11 +31,15 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.ultradevs.mytodolist.R;
 import org.ultradevs.mytodolist.adapter.TaskCursorAdapter;
+import org.ultradevs.mytodolist.helpers.db_helper;
 import org.ultradevs.mytodolist.utils.TaskContract;
+import org.ultradevs.mytodolist.utils.UserContract;
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -56,7 +62,6 @@ public class MainFragment extends Fragment implements
     private int mPriority;
     private ImageButton addBtn;
     private LinearLayout add_box;
-    boolean initialSizeObtained = false;
 
     // Constants for logging and referring to a unique loader
     private static final int TASK_LOADER_ID = 0;
@@ -93,6 +98,7 @@ public class MainFragment extends Fragment implements
 
         add_box = (LinearLayout) view.findViewById(R.id.add_box);
         add_box.setOnTouchListener(this);
+
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override

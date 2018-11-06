@@ -18,18 +18,17 @@
         android:paddingRight="24dp">
 
         <TextView
-            android:id="@+id/u_name"
+            android:id="@+id/top_txt_uname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ahmed Hady"
+            android:text="@UserName"
             android:textSize="26sp" />
 
         <TextView
-            android:id="@+id/u_email"
+            android:id="@+id/top_txt_uemail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ahmedhady6@gmail.com"
-            />
+            android:text="user@email" />
 
     </LinearLayout>
 

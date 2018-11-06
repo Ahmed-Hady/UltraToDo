@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
@@ -56,7 +57,9 @@ public class MainActivity extends AppCompatActivity
     public MainFragment mMain;
 
     public Toolbar toolbar;
-    public DrawerLayout drawer;
+
+    private TextView user_name;
+    private TextView user_email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +99,9 @@ public class MainActivity extends AppCompatActivity
 
         adapter.setSelected(POS_TODAY_LIST);
 
+        user_name = (TextView) findViewById(R.id.top_txt_uname);
+        user_email = (TextView) findViewById(R.id.top_txt_uemail);
+
         if(CheckDB() == false) {
             updateFragment(this.mRegister);
             slidingRootNav.setMenuLocked(true);
@@ -105,6 +111,7 @@ public class MainActivity extends AppCompatActivity
                 slidingRootNav.setMenuLocked(true);
             }else{
                 updateFragment(mMain);
+                SetUserInfo();
                 slidingRootNav.setMenuLocked(false);
             }
         }
@@ -170,7 +177,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-
     private DrawerItem createItemFor(int position) {
         return new SimpleItem(screenIcons[position], screenTitles[position])
                 .withIconTint(color(R.color.textColorSecondary))
@@ -230,5 +236,11 @@ public class MainActivity extends AppCompatActivity
                 break;
         }
         slidingRootNav.closeMenu();
+    }
+
+    public void SetUserInfo(){
+        mUsersDbHelper = new db_helper(getBaseContext());
+        user_name.setText(mUsersDbHelper.getUserName());
+        user_email.setText(mUsersDbHelper.getUserEmail());
     }
 }

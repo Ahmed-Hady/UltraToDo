@@ -74,6 +74,7 @@ public class LoginFragment extends Fragment
             if(((MainActivity)getActivity()).CheckLogin() == true) {
                 ((MainActivity) getActivity()).SetDrawer(true);
                 ((MainActivity) getActivity()).updateFragment(((MainActivity) getActivity()).mMain);
+                ((MainActivity) getActivity()).SetUserInfo();
             } else {
                 Toast.makeText(getContext(), "Login Failed ! .. Please try again", Toast.LENGTH_LONG).show();
             }

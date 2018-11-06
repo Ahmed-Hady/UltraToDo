@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import org.ultradevs.mytodolist.utils.UserContract;
 import org.ultradevs.mytodolist.utils.UserContract.USERS_ENTERY;
 
 import static org.ultradevs.mytodolist.activities.MainActivity.LOG_TAG;
@@ -43,6 +44,32 @@ public class db_helper extends SQLiteOpenHelper {
         int count = cursor.getCount();
         cursor.close();
         return count;
+    }
+
+    public String getUserName() {
+        String Query = "SELECT  * FROM " + TABLE_NAME + " WHERE " + USERS_ENTERY.COLUMN_STATUS + "=1";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(Query, null);
+        int nameIndex = cursor.getColumnIndex(USERS_ENTERY.COLUMN_NAME);
+        String uname = null;
+        if (cursor.moveToFirst()) {
+            uname = cursor.getString(nameIndex);
+        }
+        cursor.close();
+        return uname;
+    }
+
+    public String getUserEmail() {
+        String Query = "SELECT  * FROM " + TABLE_NAME + " WHERE " + USERS_ENTERY.COLUMN_STATUS + "=1";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(Query, null);
+        int emailIndex = cursor.getColumnIndex(USERS_ENTERY.COLUMN_EMAIL);
+        String uemail = null;
+        if (cursor.moveToFirst()) {
+            uemail = cursor.getString(emailIndex);
+        }
+        cursor.close();
+        return uemail;
     }
 
     public int getNumOfLog() {

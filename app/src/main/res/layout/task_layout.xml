@@ -9,7 +9,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:orientation="vertical"
-    tools:context="org.ultradevs.todolist.activities.MainActivity">
+    android:background="@drawable/rounded_box"
+    tools:context="org.ultradevs.mytodolist.activities.MainActivity">
 
     <!--
         This horizontal linear layout displays the description and priority of a task
@@ -78,12 +79,6 @@
             android:textAppearance="@android:style/TextAppearance.Small" />
 
     </LinearLayout>
-
-    <!-- A gray divider line at the bottom of each task -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
 
 </LinearLayout>
 

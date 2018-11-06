@@ -121,10 +121,9 @@ public class TaskCursorAdapter extends RecyclerView.Adapter<TaskCursorAdapter.Ta
         String priorityString = prio_str;
         holder.priorityView.setText(priorityString);
 
-        GradientDrawable taskbox = (GradientDrawable) holder.TaskBox.getBackground();
         // Get the appropriate background color based on the priority
         int priorityColor = getPriorityColor(priority);
-        taskbox.setColor(priorityColor);
+        holder.taskDescriptionView.setTextColor(priorityColor);
 
         String today = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
         if(date.equals(today)) {

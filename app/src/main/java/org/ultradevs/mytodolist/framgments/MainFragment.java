@@ -1,7 +1,9 @@
 package org.ultradevs.mytodolist.framgments;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -107,7 +109,7 @@ public class MainFragment extends Fragment implements
     }
 
 
-    public void SetRecyclerView(View view){
+    public void SetRecyclerView(final View view){
         mRecyclerView = (RecyclerView) view.findViewById(R.id.task_list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         // Initialize the adapter and attach it to the RecyclerView
@@ -121,6 +123,7 @@ public class MainFragment extends Fragment implements
             }
 
             // Called when a user swipes left or right on a ViewHolder
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 int id = (int) viewHolder.itemView.getTag();
@@ -130,9 +133,8 @@ public class MainFragment extends Fragment implements
                 uri = uri.buildUpon().appendPath(stringId).build();
 
                 getContext().getContentResolver().delete(uri, null, null);
-
                 getActivity().getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, MainFragment.this);
-
+                Toast.makeText(getContext(),"Task Removed !",Toast.LENGTH_LONG).show();
             }
         }).attachToRecyclerView(mRecyclerView);
 

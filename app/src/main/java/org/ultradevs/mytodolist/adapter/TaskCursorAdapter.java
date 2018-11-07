@@ -30,6 +30,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import org.ultradevs.mytodolist.R;
+import org.ultradevs.mytodolist.helpers.db_helper;
 import org.ultradevs.mytodolist.utils.TaskContract;
 
 import java.text.SimpleDateFormat;
@@ -82,6 +83,10 @@ public class TaskCursorAdapter extends RecyclerView.Adapter<TaskCursorAdapter.Ta
     @Override
     public void onBindViewHolder(TaskViewHolder holder, int position) {
 
+        db_helper UDB = new db_helper(mContext);
+
+        int LogedInUID = UDB.getUID();
+
         // Indices for the _id, description, and priority columns
         int idIndex = mCursor.getColumnIndex(TaskContract.TaskEntry._ID);
         int descriptionIndex = mCursor.getColumnIndex(TaskContract.TaskEntry.COLUMN_DESCRIPTION);
@@ -91,47 +96,51 @@ public class TaskCursorAdapter extends RecyclerView.Adapter<TaskCursorAdapter.Ta
 
         mCursor.moveToPosition(position); // get to the right location in the cursor
 
-        // Determine the values of the wanted data
-        final int id = mCursor.getInt(idIndex);
-        String description = mCursor.getString(descriptionIndex);
-        String date = mCursor.getString(dateIndex);
-        String time = mCursor.getString(timeIndex);
-        int priority = mCursor.getInt(priorityIndex);
+        int uid = mCursor.getColumnIndex(TaskContract.TaskEntry.COLUMN_USER_ID);
 
-        String prio_str = null;
-        switch (priority){
-            case 0:
-                prio_str = "H";
-                break;
-            case 1:
-                prio_str = "M";
-                break;
-            case 2:
-                prio_str = "L";
-                break;
-        }
+        if(mCursor.getInt(uid) == LogedInUID) {
+            // Determine the values of the wanted data
+            final int id = mCursor.getInt(idIndex);
+            String description = mCursor.getString(descriptionIndex);
+            String date = mCursor.getString(dateIndex);
+            String time = mCursor.getString(timeIndex);
+            int priority = mCursor.getInt(priorityIndex);
 
-        //Set values
-        holder.itemView.setTag(id);
-        holder.taskDescriptionView.setText(description);
-        holder.DateView.setText(date);
-        holder.TimeView.setText(time);
+            String prio_str = null;
+            switch (priority) {
+                case 0:
+                    prio_str = "H";
+                    break;
+                case 1:
+                    prio_str = "M";
+                    break;
+                case 2:
+                    prio_str = "L";
+                    break;
+            }
 
-        // Programmatically set the text and color for the priority TextView
-        String priorityString = prio_str;
-        holder.priorityView.setText(priorityString);
+            //Set values
+            holder.itemView.setTag(id);
+            holder.taskDescriptionView.setText(description);
+            holder.DateView.setText(date);
+            holder.TimeView.setText(time);
 
-        // Get the appropriate background color based on the priority
-        int priorityColor = getPriorityColor(priority);
-        holder.taskDescriptionView.setTextColor(priorityColor);
+            // Programmatically set the text and color for the priority TextView
+            String priorityString = prio_str;
+            holder.priorityView.setText(priorityString);
 
-        String today = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-        if(date.equals(today)) {
-        }else{
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                holder.taskDescriptionView.setTextAppearance(R.style.AppTheme_oldTasks);
-                holder.DateView.setTextAppearance(R.style.AppTheme_oldTasks);
-                holder.TimeView.setTextAppearance(R.style.AppTheme_oldTasks);
+            // Get the appropriate background color based on the priority
+            int priorityColor = getPriorityColor(priority);
+            holder.taskDescriptionView.setTextColor(priorityColor);
+
+            String today = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+            if (date.equals(today)) {
+            } else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    holder.taskDescriptionView.setTextAppearance(R.style.AppTheme_oldTasks);
+                    holder.DateView.setTextAppearance(R.style.AppTheme_oldTasks);
+                    holder.TimeView.setTextAppearance(R.style.AppTheme_oldTasks);
+                }
             }
         }
 

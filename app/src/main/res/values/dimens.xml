@@ -19,4 +19,5 @@
     <dimen name="desc_text_margin">6dp</dimen>
     <dimen name="lin_box_margin">6dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="task_layout_box_paddingStart">12dp</dimen>
 </resources>

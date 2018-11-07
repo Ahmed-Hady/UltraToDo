@@ -50,7 +50,8 @@ public class TaskDbHelper extends SQLiteOpenHelper {
                         TaskContract.TaskEntry.COLUMN_DESCRIPTION + " TEXT NOT NULL, " +
                         TaskContract.TaskEntry.COLUMN_PRIORITY    + " INTEGER NOT NULL," +
                         TaskContract.TaskEntry.COLUMN_DATE    + " VARCHAR(255) NOT NULL," +
-                        TaskContract.TaskEntry.COLUMN_TIME    + " VARCHAR(255) NOT NULL" + ");";
+                        TaskContract.TaskEntry.COLUMN_TIME    + " VARCHAR(255) NOT NULL," +
+                        TaskContract.TaskEntry.COLUMN_USER_ID    + " INTEGER(255) NOT NULL" + ");";
 
         db.execSQL(CREATE_TABLE);
     }

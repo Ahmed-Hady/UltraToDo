@@ -211,6 +211,8 @@ public class MainFragment extends Fragment implements
         contentValues.put(TaskContract.TaskEntry.COLUMN_PRIORITY, mPriority);
         contentValues.put(TaskContract.TaskEntry.COLUMN_DATE, date);
         contentValues.put(TaskContract.TaskEntry.COLUMN_TIME, mdformat.format(calendar.getTime()));
+        db_helper USER_DB_HELPER = new db_helper(getContext());
+        contentValues.put(TaskContract.TaskEntry.COLUMN_USER_ID, USER_DB_HELPER.getUID());
 
         Uri uri = getContext().getContentResolver().insert(TaskContract.TaskEntry.CONTENT_URI, contentValues);
 

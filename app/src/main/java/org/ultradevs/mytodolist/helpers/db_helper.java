@@ -72,6 +72,19 @@ public class db_helper extends SQLiteOpenHelper {
         return uemail;
     }
 
+    public int getUID() {
+        String Query = "SELECT  * FROM " + TABLE_NAME + " WHERE " + USERS_ENTERY.COLUMN_STATUS + "=1";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(Query, null);
+        int IDIndex = cursor.getColumnIndex(USERS_ENTERY._ID);
+        int uid = 0;
+        if (cursor.moveToFirst()) {
+            uid = cursor.getInt(IDIndex);
+        }
+        cursor.close();
+        return uid;
+    }
+
     public int getNumOfLog() {
         String countQuery = "SELECT  *  FROM " + TABLE_NAME + " WHERE " + USERS_ENTERY.COLUMN_STATUS + "=?";
         SQLiteDatabase db = this.getReadableDatabase();

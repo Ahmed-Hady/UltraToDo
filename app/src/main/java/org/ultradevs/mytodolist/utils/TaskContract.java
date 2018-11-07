@@ -49,6 +49,7 @@ public class TaskContract {
         public static final String COLUMN_PRIORITY = "priority";
         public static final String COLUMN_DATE = "date";
         public static final String COLUMN_TIME = "time";
+        public static final String COLUMN_USER_ID = "uid";
 
     }
 }

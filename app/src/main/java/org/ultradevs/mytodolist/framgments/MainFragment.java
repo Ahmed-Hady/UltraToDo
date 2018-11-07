@@ -217,7 +217,7 @@ public class MainFragment extends Fragment implements
         Uri uri = getContext().getContentResolver().insert(TaskContract.TaskEntry.CONTENT_URI, contentValues);
 
         if(uri != null) {
-            Toast.makeText(getContext(), "Task Added !", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), getContext().getString(R.string.task_added), Toast.LENGTH_LONG).show();
             txtDesc.setText("");
             getActivity().getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, this);
         }

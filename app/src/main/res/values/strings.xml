@@ -26,4 +26,5 @@
     <string name="LoginBtn">Login Now</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
 
+    <string name="task_added">Task Added !</string>
 </resources>

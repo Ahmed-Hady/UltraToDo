@@ -88,17 +88,31 @@ public class MainFragment extends Fragment implements
         txtDesc = (android.support.design.widget.TextInputEditText) view.findViewById(R.id.editTextTaskDescription);
         sPrio = (Spinner) view.findViewById(R.id.prio);
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.task_list);
-
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        // Initialize the adapter and attach it to the RecyclerView
-        mAdapter = new TaskCursorAdapter(getContext());
-        mRecyclerView.setAdapter(mAdapter);
-
         add_box = (LinearLayout) view.findViewById(R.id.add_box);
         add_box.setOnTouchListener(this);
 
+        SetRecyclerView(view);
+
+        getActivity().getSupportLoaderManager().initLoader(TASK_LOADER_ID, null, this);
+
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // re-queries for all tasks
+        getActivity().getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, this);
+    }
+
+
+    public void SetRecyclerView(View view){
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.task_list);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        // Initialize the adapter and attach it to the RecyclerView
+        mAdapter = new TaskCursorAdapter(getContext());
+        mRecyclerView.setAdapter(mAdapter);
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
@@ -122,19 +136,8 @@ public class MainFragment extends Fragment implements
             }
         }).attachToRecyclerView(mRecyclerView);
 
-
-        getActivity().getSupportLoaderManager().initLoader(TASK_LOADER_ID, null, this);
-
-        return view;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        // re-queries for all tasks
-        getActivity().getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, this);
-    }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, final Bundle loaderArgs) {
